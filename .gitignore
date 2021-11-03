@@ -1,0 +1,11 @@
+*.egg-info
+*.pyc
+.DS_Store
+build
+*.json
+*.zip
+dist
+docs/build/*
+playground
+venv
+__pycache__
