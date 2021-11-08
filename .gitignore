@@ -2,7 +2,7 @@
 *.pyc
 .DS_Store
 build
-*.json
+local_settings.json
 *.zip
 dist
 docs/build/*

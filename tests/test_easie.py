@@ -11,34 +11,41 @@ class TestEasie(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.easie = Easie()
+        cls.easie = Easie.from_settings(utils.get_settings())
 
-    def test_e_insertion(self):
-        dfs_params = {
-            'tb_test_1': {
+    def test_a_insert_in_easie(self):
+        """Tests easie insert_in_easie method"""
+        
+        dfs_params = [
+            {
+                'table_name':'tb_test_1',
                 'params':{
                     'not_exists_create': True,
                     'replace':True
                 },
                 'df': pd.DataFrame({'a': [0, 1, 2], 'b': ['a', 'b', 'c']})
             },
-            'tb_test_2': {
+            {
+                'table_name':'tb_test_2',
                 'params':{
                     'not_exists_create': True,
                     'replace':True
                 },
                 'df': pd.DataFrame({'a': [0, 1, 2], 'b': ['a', 'b', 'c'], 'c': [0, 'a', 'b']})
-            },
-        }
+            }
+            
+        ]
         self.easie.insert_in_easie(dfs_params)
-        self.assertTrue(self.easie.insertion_res['tb_test_1']['success'])
-        self.assertTrue(self.easie.insertion_res['tb_test_1']['success'])
+        self.assertTrue(self.easie.insertion_res[f'tb_test_1 @{self.easie.user}']['success'])
+        self.assertTrue(self.easie.insertion_res[f'tb_test_2 @{self.easie.user}']['success'])
         
-    def test_fetch_tables(self):
+    def test_b_get_easie_tables(self):
+        """Tests easie get_easie_tables method"""
+
         table_names = ['tb_test_1', 'tb_test_2']
         self.easie.get_easie_tables(table_names)
-        self.assertTrue('tb_test_1' in self.easie.dfs)
-        self.assertTrue('tb_test_2' in self.easie.dfs)
+        self.assertTrue(f'tb_test_1' in self.easie.dfs)
+        self.assertTrue(f'tb_test_2' in self.easie.dfs)
 
 
 

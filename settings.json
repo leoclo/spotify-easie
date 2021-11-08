@@ -1,0 +1,33 @@
+{
+	"easie": {
+		"user": "",
+		"developer_key": "",
+		"url_api": "https://api.easiedata.com"
+	},
+	"spotify": {
+		"client_id": "",
+		"client_secret": ""
+	},
+	"core": {
+		"artists_top_tracks":{
+			"names": [],
+			"top_tracks": 4,
+			"markets": [],
+			"easie_table_name": "artists_top_tracks"
+		},
+		"related_artists_top_tracks":{
+			"relative_popularity": 50,
+			"genres": [],
+			"top_tracks": 2,
+			"markets": [],
+			"easie_table_name": "related_artists_top_tracks"
+		},
+		"track_recomendations": {
+			"max_popularity": 100,
+			"seed_genres": [],
+			"seed_tracks_top": 5,
+			"markets": [],
+			"easie_table_name": "related_artists_top_tracks"
+		}
+	}
+}
