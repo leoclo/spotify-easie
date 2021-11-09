@@ -3,8 +3,8 @@
 ---
 
 # Introduction
-The ``spotify-easie`` is project to serve as an example of how to use [api_easiedata](https://github.com/easiedata/api_easiedata) to create custom databases using data retrieved from spotify on [easiedata](https://www.easiedata.com/login).
-It creates 3 tables in easiedata with the objective of generating track recommendations.
+The ``spotify-easie`` project goal is to serve as an example of how to use [api_easiedata](https://github.com/easiedata/api_easiedata) to create custom databases using data retrieved from spotify on [easiedata](https://www.easiedata.com/login).
+It creates 3 tables in easiedata with the objective of generating track recommendations using the spotify API.
 
 ## Pre-requisites
 
