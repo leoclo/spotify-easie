@@ -1,44 +1,35 @@
 {
-	"easie": {
-		"user": "",
-		"developer_key": "",
-		"url_api": "https://api.easiedata.com"
-	},
-	"spotify": {
-		"client_id": "",
-		"client_secret": "",
-		"track_infos": [
-            "id", "name", "popularity", "album.id", "album.release_date", "album.name"
-        ],
-        "artists_info": [
-            "id", "name", "popularity", "genres", "followers.total"
-        ]
-	},
-	"core": {
-		"easie_table_ref":{
-			"artists_top_tracks": "top_tracks",
-			"related_artists_top_tracks": "related_top_tracks",
-			"track_recomendations": "recomendations"
-		},
-		"artists_top_tracks":{
-			"artists_names": ["milky chance", "jack johnson"],
-			"markets": ["US", "BR"],
-			"top_tracks": 2,
-			"easie_table_name": "artists_top_tracks"
-			
-		},
-		"related_artists_top_tracks":{
-			"max_popularity": 65,
-			"genres": [],
-			"top_tracks": 1,
-			"easie_table_name": "related_artists_top_tracks",
-			"markets": ["US", "BR"]
-		},
-		"track_recommendations": {
-			"query_params": {
-				"market": "US"
-			},
-			"easie_table_name": "track_recomendations"
-		}
-	}
+    "easie": {
+        "user": "",
+        "developer_key": "",
+        "url_api": "https://api.easiedata.com"
+    },
+    "spotify": {
+        "client_id": "",
+        "client_secret": "",
+        "track_info": ["album.id", "album.name"],
+        "artist_info": ["genres"]
+    },
+    "core": {
+        "easie_table_ref":{
+            "artists_top_tracks": "top_tracks",
+            "related_artists_top_tracks": "related_top_tracks",
+            "track_recomendations": "recomendations"
+        },
+        "artists_top_tracks":{
+            "artists_names": ["milky chance", "jack johnson"],
+            "markets": ["US", "BR"],
+            "top_tracks": 2,
+        },
+        "related_artists_top_tracks":{
+            "max_popularity": 65,
+            "top_tracks": 1,
+            "markets": ["US", "BR"]
+        },
+        "track_recommendations": {
+            "query_params": {
+                "market": "US"
+            }
+        }
+    }
 }
