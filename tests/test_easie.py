@@ -44,8 +44,12 @@ class TestEasie(unittest.TestCase):
             }
         ]
         self.easie.insert_in_easie(dfs_params)
-        self.assertTrue(self.easie.insertion_res[f'tb_test_1 @{self.easie.user}']['success'])
-        self.assertTrue(self.easie.insertion_res[f'tb_test_2 @{self.easie.user}']['success'])
+        self.assertTrue(
+            self.easie.insertion_res[f'tb_test_1 @{self.easie.user}']['success']
+        )
+        self.assertTrue(
+            self.easie.insertion_res[f'tb_test_2 @{self.easie.user}']['success']
+        )
 
     def test_b_get_easie_tables(self):
         """Tests easie get_easie_tables method"""

@@ -23,7 +23,7 @@ All you need for this project is Client ID and Client Secret
 
 Clone the repository or download the .zip file and extract it on the desired directory
 
-Create a virtual environment with the commands
+Create a virtual environment with the command
 
 ```bash
 python -m venv venv
@@ -44,7 +44,7 @@ pip install -r requirements.txt
 
 ## Testing
 ---
-With the activated enviroment set the variables on settings.json file and run the following command
+With the activated enviroment set the variables on settings.json file and run the following commands
 
 ```bash
 python tests/test_easie.py settings.json
