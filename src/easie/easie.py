@@ -1,15 +1,15 @@
 import api_easiedata
-from src.utils import utils
 
 
 class Easie():
     """
-        A class that is used to comunicate with easiedata api for loading and extracting data
+        A class that is used to comunicate with easiedata api for loading and
+        extracting data
 
         Parameters
         ----------
-        
-        user : str 
+
+        user : str
             easiedata username
         developer_key : str
             easiedata generated developer key
@@ -25,34 +25,34 @@ class Easie():
             self.user, self.developer_key, self.url_api
         )
         self.insertion_res = {}
-        return None
 
     @classmethod
     def from_settings(cls, settings):
         return cls(**settings['easie'])
 
     def insert_in_easie(self, dfs_params):
-        """ 
+        """
             Method to insert data in easiedata
 
             Parameters
             ----------
 
-            dfs_params: [
+            dfs_params: list
+                list of with object with parameters for data insertion in easie
                 {
-                    "table_name": str 
+                    "table_name": str
                         easie table name
-                    "df": pd.DataFrame 
+                    "df": pd.DataFrame
                         Data to be inserted
                     "params": {
                         not_exists_create: bool
                             If table doesnt exists it creates it
-                        replace: bool 
-                            Replaces the data in table in easie with data being sent                        
+                        replace: bool
+                            Replaces the data in table in easie with data
+                            being sent
                     }
 
                 }
-            ]
         """
 
         for data in dfs_params:
@@ -64,21 +64,24 @@ class Easie():
             except Exception as e:
                 self.insertion_res[data['table_name']]['success'] = False
                 self.insertion_res[data['table_name']]['Exception'] = e.args
-        
+
         return self
 
     def get_easie_tables(self, table_names):
-        """ Method to retrieve data from tables in easie"""
+        """
+            Method to retrieve data from tables in easie
 
-        self.dfs = dict()
+            Parameters
+            ----------
+            table_names: list
+                Names of tables in easie
+        """
+
+        dfs = {}
         for tb in table_names:
             table_name = f'{tb} @{self.user}'
             res_get = self.easie_api.get_easieusertb(table_name)
-            self.dfs[tb] = res_get.df
+            dfs[tb] = res_get.df
             del res_get.df
 
-        return self
-
-
-        
-        
+        return dfs
