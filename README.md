@@ -1,4 +1,4 @@
-# easie-spotify
+# spotify-easie
 
 ---
 
