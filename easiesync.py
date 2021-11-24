@@ -1,5 +1,6 @@
 import sys
 from src.easie import Easie
+from src.logging.logging import logging
 from src.spotify import Spotify
 from src.utils import utils
 from src.core import core
@@ -60,6 +61,16 @@ class EasieSync():
         return self.build_track_recommendations()
 
 
+@logging
+def run():
+    easiesync = None
+    try:
+        easiesync = EasieSync(utils.get_settings())
+        easiesync[sys.argv[2]]()
+    except Exception as e:
+        return easiesync, e
+        
+    return easiesync, None
+
 if __name__ == '__main__':
-    insertion_res = EasieSync(utils.get_settings())[sys.argv[2]]()
-    utils.pretty_print(insertion_res)
+    run()

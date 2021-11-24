@@ -1,4 +1,6 @@
 import api_easiedata
+import json
+from src.error.error import MissingDataFrame
 
 
 class Easie():
@@ -24,13 +26,15 @@ class Easie():
         self.easie_api = api_easiedata.easie_usertb.EasieUsertb(
             self.user, self.developer_key, self.url_api
         )
-        self.insertion_res = {}
+
+        self.post_res = []
+        self.get_res = []
 
     @classmethod
     def from_settings(cls, settings):
         return cls(**settings['easie'])
 
-    def insert_in_easie(self, dfs_params):
+    def post_in_easie(self, dfs_params):
         """
             Method to insert data in easiedata
 
@@ -41,7 +45,9 @@ class Easie():
                 list of with object with parameters for data insertion in easie
                 {
                     "table_name": str
-                        easie table name
+                        easie table name,
+                    "action": str
+                        action to be performed,
                     "df": pd.DataFrame
                         Data to be inserted
                     "params": {
@@ -57,13 +63,18 @@ class Easie():
 
         for data in dfs_params:
             data['table_name'] = f"{data['table_name']} @{self.user}"
-            self.insertion_res[data['table_name']] = {}
+            post_res = {
+                'table_name': data['table_name'],
+                'res': {}
+            }
             try:
-                self.easie_api.post_easieusertb('insert_with_df', **data)
-                self.insertion_res[data['table_name']] = self.easie_api.res
+                self.easie_api.post_easieusertb(**data)
+                post_res['res'] = self.easie_api.res
+                self.post_res.append(post_res)
             except Exception as e:
-                self.insertion_res[data['table_name']]['success'] = False
-                self.insertion_res[data['table_name']]['Exception'] = e.args
+                post_res["res"]['success'] = False
+                post_res["res"]['Exception'] = json.dumps(e.args)
+                self.post_res.append(post_res)
 
         return self
 
@@ -81,7 +92,11 @@ class Easie():
         for tb in table_names:
             table_name = f'{tb} @{self.user}'
             res_get = self.easie_api.get_easieusertb(table_name)
+
+            if not hasattr(res_get, 'df'):
+                self.get_res.append(res_get.res)
+                raise MissingDataFrame(tb)
+                
             dfs[tb] = res_get.df
             del res_get.df
-
         return dfs

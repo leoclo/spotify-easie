@@ -24,6 +24,7 @@ class TestEasie(unittest.TestCase):
         dfs_params = [
             {
                 'table_name':'tb_test_1',
+                'action': 'insert_with_df',
                 'params':{
                     'not_exists_create': True,
                     'replace':True
@@ -32,6 +33,7 @@ class TestEasie(unittest.TestCase):
             },
             {
                 'table_name':'tb_test_2',
+                'action': 'insert_with_df',
                 'params':{
                     'not_exists_create': True,
                     'replace':True
@@ -43,12 +45,12 @@ class TestEasie(unittest.TestCase):
                 })
             }
         ]
-        self.easie.insert_in_easie(dfs_params)
+        self.easie.post_in_easie(dfs_params)
         self.assertTrue(
-            self.easie.insertion_res[f'tb_test_1 @{self.easie.user}']['success']
+            self.easie.post_res[0]['res']['success']
         )
         self.assertTrue(
-            self.easie.insertion_res[f'tb_test_2 @{self.easie.user}']['success']
+            self.easie.post_res[1]['res']['success']
         )
 
     def test_b_get_easie_tables(self):

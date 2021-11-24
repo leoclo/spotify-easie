@@ -31,5 +31,12 @@
                 "market": "US"
             }
         }
+    },
+    "logging": {
+        "save_success": false, 
+        "easie_error_tb": true,
+        "easie_error_tb_name": "spotify-easie-log",
+        "easie_error_file": true, 
+        "easie_error_filename": "log"
     }
 }

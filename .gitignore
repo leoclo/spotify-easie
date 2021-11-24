@@ -9,3 +9,4 @@ docs/build/*
 playground
 venv
 __pycache__
+log

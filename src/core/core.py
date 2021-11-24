@@ -10,8 +10,8 @@ def easie_insertion(func):
     @wraps(func)
     def core_method(*args, **kwargs):
         easie, df_params = func(*args, **kwargs)
-        easie.insert_in_easie(df_params)
-        return easie.insertion_res
+        easie.post_in_easie(df_params)
+        return easie.post_res
 
     return core_method
 
@@ -62,6 +62,7 @@ def artists_top_tracks(easie, spotify, core_settings, easie_table_ref):
 
     df_params = [{
         'table_name': easie_table_ref['artists_top_tracks'],
+        'action': 'insert_with_df',
         'df': data_manipulation.sort_n_largest_market_popularity(
             artists_ids, df, core_settings),
         'params': {'not_exists_create': True, 'replace': True}
@@ -123,6 +124,7 @@ def related_artists_top_tracks(easie, spotify, core_settings, easie_table_ref):
 
     df_params = [{
         'table_name': easie_table_ref['related_artists_top_tracks'],
+        'action': 'insert_with_df',
         'df': data_manipulation.sort_n_largest_market_popularity(
             artists_ids, df, core_settings
         ),
@@ -170,6 +172,7 @@ def track_recommendations(easie, spotify, core_settings, easie_table_ref):
     ]
     df_params = [{
         'table_name': easie_table_ref['track_recommendations'],
+        'action': 'insert_with_df',
         'df': pd.DataFrame(spotify.get_recomendations_track_info({
             'seed_tracks': seed_tracks,
             **core_settings['query_params']
