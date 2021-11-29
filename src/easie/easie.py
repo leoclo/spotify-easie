@@ -1,6 +1,6 @@
 import api_easiedata
 import json
-from src.error.error import MissingDataFrame
+from src.error import MissingDataFrame
 
 
 class Easie():
@@ -69,7 +69,7 @@ class Easie():
             }
             try:
                 self.easie_api.post_easieusertb(**data)
-                post_res['res'] = self.easie_api.res
+                post_res['res'] = json.loads(str(self.easie_api))
                 self.post_res.append(post_res)
             except Exception as e:
                 post_res["res"]['success'] = False
@@ -94,7 +94,7 @@ class Easie():
             res_get = self.easie_api.get_easieusertb(table_name)
 
             if not hasattr(res_get, 'df'):
-                self.get_res.append(res_get.res)
+                self.get_res.append(json.loads(str(res_get)))
                 raise MissingDataFrame(tb)
                 
             dfs[tb] = res_get.df
