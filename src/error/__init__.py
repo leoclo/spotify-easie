@@ -1,5 +1,5 @@
 """
-costum exceptions 
+custom exceptions 
 """
 
 class MissingDataFrame(Exception):
