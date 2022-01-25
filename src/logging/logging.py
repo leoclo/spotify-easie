@@ -5,7 +5,6 @@ from datetime import datetime
 from functools import wraps
 from src.core import core
 from src.easie import Easie
-from src.spotify import Spotify
 from src.utils import utils
 
 
