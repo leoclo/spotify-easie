@@ -106,15 +106,14 @@ class Logging():
             get_res = json.dumps(get_res)
 
         columns = ['timestamp', 'post_res', 'get_res', 'exception']
-        data = [[
-            datetime.now(),
-            post_res,
-            get_res, 
-            e
-        ]]
+        data = [[datetime.now(), post_res, get_res, e]]
 
         df = pd.DataFrame(data,columns=columns)
-
+        
+        if self.logging['easie_error_file']:
+            with open(self.logging['easie_error_filename'], 'a') as f:
+                f.write(str(data) + '\n')
+        
         if self.logging['easie_error_tb']:
             params = {
                 'not_exists_create': True,
@@ -129,9 +128,5 @@ class Logging():
             }]
 
             self.easie.post_in_easie(df_params)
-
-        if self.logging['easie_error_file']:
-            with open(self.logging['easie_error_filename'], 'a') as f:
-                f.write(str(data) + '\n')
 
         return None
